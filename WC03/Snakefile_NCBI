@@ -1,0 +1,11 @@
+import os
+from snakemake.remote.NCBI import RemoteProvider as NCBI_RP
+
+NCBI = NCBI_RP(email="h.s.reefman@st.hanze.nl")
+
+rule all:
+	input:
+		NCBI.remote("KY785484.1.fasta", db="nuccore")
+	run:
+		outputName = os.path.basename("test.fasta")
+		shell("mv {input} {outputName}")
